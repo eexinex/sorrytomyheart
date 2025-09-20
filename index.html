@@ -3,100 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>จดหมายถึงปุระชัย — น่านฟ้าเขียนให้</title>
- 
+  <title>รักน้าาาไออ้วน </title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg1:#ffe7f1; --bg2:#ffd1e6; --bg3:#ffc2dc;
       --pink:#ff5c95; --rose:#c2185b; --ink:#3a2a2a; --card:#ffffffeb;
-      --glass: 20px; --shadow: 0 20px 60px rgba(0,0,0,.18);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font-family: "Prompt", system-ui, -apple-system, Segoe UI, Tahoma, sans-serif; color:var(--ink);
+    body{
+      margin:0; font-family:"Prompt",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif; color:var(--ink);
       background: radial-gradient(1200px 800px at 20% -10%, var(--bg3), transparent 60%),
                   radial-gradient(950px 650px at 120% 0%, var(--bg2), transparent 60%),
                   linear-gradient(180deg, var(--bg1), #ffd6ea);
       overflow-x:hidden;
     }
-    .glow{position:fixed; inset:0; pointer-events:none; background:
-      radial-gradient(800px 500px at 70% 90%, rgba(255,220,240,.6), transparent 70%),
-      radial-gradient(900px 600px at 10% 10%, rgba(255,230,250,.5), transparent 60%);
-      filter:saturate(1.05);
-    }
 
-    .wrap{max-width:1100px; margin:0 auto; padding:18px 18px 30px;}
-
-    header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin:8px 0 16px}
-    .brand{display:flex; align-items:center; gap:12px}
-    .brand i{font-size:26px}
-    h1{margin:0; font-weight:800; color:var(--rose); letter-spacing:.5px}
-
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 18px 28px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin:8px 0 14px}
+    h1{margin:0; color:var(--rose); font-weight:800; letter-spacing:.3px}
     .audioBar{display:flex; align-items:center; gap:10px}
-    .soundBtn{background:var(--pink); color:#fff; border:0; border-radius:14px; padding:10px 14px; cursor:pointer; box-shadow:0 8px 22px rgba(255,92,149,.35);}
+    .soundBtn{background:var(--pink); color:#fff; border:0; border-radius:12px; padding:10px 14px; cursor:pointer; box-shadow:0 8px 22px rgba(255,92,149,.35)}
     .soundBtn:hover{transform:translateY(-1px)}
 
-    .stage{position:relative; height:calc(100vh - 170px); min-height:560px; max-height:860px; border-radius:28px; overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.3)); backdrop-filter: blur(10px);
-      box-shadow:var(--shadow); display:grid; place-items:center;}
-
-    /* floating hearts */
-    .hearts{position:absolute; inset:0; overflow:hidden; pointer-events:none;}
-    .hearts span{position:absolute; bottom:-40px; width:18px; height:18px; background:var(--pink); opacity:.55; transform:rotate(45deg);
-      animation: floatUp linear forwards; box-shadow:0 4px 10px rgba(255,92,149,.35)}
+    .stage{
+      position:relative; height:calc(100vh - 170px); min-height:560px; max-height:880px; border-radius:26px; overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.66), rgba(255,255,255,.38)); backdrop-filter:blur(10px);
+      box-shadow:0 18px 50px rgba(0,0,0,.18);
+    }
+    .progress{position:absolute; top:0; left:0; height:4px; background:linear-gradient(90deg,#ff8fb3,#ff5c95); width:0%; transition:width .35s}
+    .hearts{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+    .hearts span{position:absolute; bottom:-36px; width:18px; height:18px; background:var(--pink); opacity:.55; transform:rotate(45deg);
+      animation:floatUp linear forwards}
     .hearts span::before,.hearts span::after{content:""; position:absolute; width:100%; height:100%; background:var(--pink); border-radius:50%}
-    .hearts span::before{left:-50%}
-    .hearts span::after{top:-50%}
+    .hearts span::before{left:-50%} .hearts span::after{top:-50%}
     @keyframes floatUp{to{transform:translateY(-120vh) rotate(45deg); opacity:0}}
 
-    /* slides */
-    .slides{position:absolute; inset:0; perspective:1200px;}
-    .slide{position:absolute; inset:0; display:none; padding:28px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:smooth;}
-    .slideInner{position:relative; margin:0 auto; max-width:900px; display:flex; flex-direction:column; align-items:center; gap:14px; background:var(--card);
-      border-radius:24px; padding:24px; box-shadow:0 14px 40px rgba(0,0,0,.18); min-height:fit-content;}
-    .slide h2{margin:6px 0 4px; color:var(--rose)}
-    .slide p{margin:0; line-height:1.9}
-    .slide img,.slide video{max-width:100%; max-height:56vh; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    .slides{position:absolute; inset:0}
+    .slide{position:absolute; inset:0; display:none; padding:24px; overflow:auto; -webkit-overflow-scrolling:touch}
+    .slide.active{display:block; animation:fade .45s ease}
+    @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+    .card{max-width:900px; margin:0 auto; background:var(--card); border-radius:22px; padding:22px; box-shadow:0 12px 36px rgba(0,0,0,.15); text-align:center}
+    .card h2{margin:6px 0 8px; color:var(--rose)}
+    .card p{line-height:1.9; margin:.3rem 0}
+    .card img,.card video{max-width:100%; max-height:56vh; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.18)}
 
-    .slide.active{display:block; animation: flipIn .7s cubic-bezier(.2,.8,.2,1)}
-    @keyframes flipIn{ from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:none} }
+    .opts{display:grid; gap:12px; margin-top:8px}
+    .opt{display:flex; gap:10px; align-items:center; background:#fff; border:2px solid #ffd1e6; border-radius:14px; padding:10px 12px; text-align:left}
+    .opt input{accent-color:#ff5c95}
+    textarea{width:100%; min-height:130px; border:2px solid #ffd1e6; border-radius:14px; padding:12px; resize:vertical; font-family:inherit}
+    .two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .sliderBox{display:grid; gap:6px; background:#fff; border:2px solid #ffd1e6; border-radius:14px; padding:12px; text-align:left}
+    input[type=range]{width:100%}
 
-    /* controls */
-    .ctrl{position:absolute; bottom:16px; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:0 18px;}
-    .navBtn{background:var(--pink); color:#fff; border:0; border-radius:14px; padding:12px 18px; cursor:pointer; box-shadow:0 10px 26px rgba(255,92,149,.4)}
-    .navBtn:disabled{opacity:.45; box-shadow:none}
-
+    .ctrl{position:absolute; bottom:14px; left:0; right:0; display:flex; align-items:center; justify-content:center; gap:10px; padding:0 18px}
     .dots{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
-    .dot{width:26px; height:26px; border-radius:50%; background:#fff; color:var(--rose); display:grid; place-items:center; cursor:pointer; box-shadow:0 3px 12px rgba(0,0,0,.12)}
+    .dot{width:28px; height:28px; border-radius:50%; background:#fff; color:var(--rose); display:grid; place-items:center; cursor:pointer; box-shadow:0 3px 12px rgba(0,0,0,.12); border:0}
     .dot.active{background:var(--pink); color:#fff}
 
-    .progress{position:absolute; top:0; left:0; height:4px; background:linear-gradient(90deg, #ff8fb3, #ff5c95); width:0%; transition:width .35s}
-
-    footer{margin:16px auto 6px; text-align:center; color:#7a5c5c; font-size:.95rem}
-    a.btnTiny{padding:4px 10px; background:#fff; border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,.12); color:var(--rose); text-decoration:none}
-
-    @media (max-width:640px){
-      .stage{height:calc(100vh - 190px)}
-      .slide img,.slide video{max-height:42vh}
-      .dot{width:24px; height:24px; font-size:.9rem}
-    }
+    footer{margin:14px 0 6px; text-align:center; color:#765d5d}
+    @media(max-width:720px){ .two{grid-template-columns:1fr} .card img,.card video{max-height:44vh} .stage{height:calc(100vh - 190px)} .dot{width:26px;height:26px;font-size:.9rem}}
   </style>
 </head>
 <body>
-  <div class="glow" aria-hidden="true"></div>
   <div class="wrap">
     <header>
-      <div class="brand">
-        <i>💞</i>
-        <h1>จดหมายถึงปุระชัย — น่านฟ้า</h1>
-      </div>
+      <h1>purachai</h1>
       <div class="audioBar">
-        <audio id="bgm" loop muted preload="metadata">
-          <source src="Oldlove.mp3" type="audio/mpeg" />
-        </audio>
+        <audio id="bgm" loop muted preload="metadata"><source src="Oldlove.mp3" type="audio/mpeg" /></audio>
         <button id="soundBtn" class="soundBtn">🔊 เปิดเสียง</button>
       </div>
     </header>
@@ -106,23 +85,36 @@
       <div class="hearts" id="hearts"></div>
 
       <div class="slides" id="slides">
-        <!-- Slide 1 (ภาพ) -->
+        <!-- 1) ภาพเปิด -->
         <section class="slide active">
-          <div class="slideInner">
-            <h2>หน้า 1 — งงๆๆๆๆ</h2>
-            <img src="image/S__65110191_0.jpg" alt="ความทรงจำของเรา 1" />
+          <div class="card">
+            <h2>หน้า 1 — อ่าววว</h2>
+            <img src="image/S__65110191_0.jpg" alt="เรา">
             <p>งงล่ะเส้ ทำไมเขียนเว็บอีกเเล้ว เบื่อมั้ยยยย เค้าเเค่หาอะไรทำรอเธอไปพบปะสังคม จะได้ทบทวนเนื้อหาการเขียนให้ไม่ลืมด้วย ได้ตั้งสองต่อ จริงๆตั้งใจทำให้ 
                 ช่วงนี้เราทะเลาะกันบ่อยมาก เหมือนเธอก็รู้สึกห่างๆไป หรือเรารักกันน้อยลง อย่างน้อยก็ทำเผื่อว่ามันจะช่วยเยียวยาเราให้โตไปด้วยกันได้นะ
             </p>
           </div>
         </section>
 
-        <!-- Slide 2 (วิดีโอ) -->
+        <!-- 2) Q1 -->
+        <section class="slide" data-req="q1">
+          <div class="card">
+            <h2>หน้า 2 — อะไรทำให้เธอรู้สึกว่า “ถูกรัก” มากที่สุด?</h2>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q1" value="คำพูดที่อบอุ่น"> คำพูดที่อบอุ่น / การยืนยันความรู้สึก</label>
+              <label class="opt"><input type="radio" name="q1" value="เวลาให้กัน"> การให้เวลาอยู่ด้วยกัน</label>
+              <label class="opt"><input type="radio" name="q1" value="กอดและสัมผัส"> การกอด โอบไหล่ แตะมือ</label>
+              <label class="opt"><input type="radio" name="q1" value="ช่วยลงมือทำ"> การช่วยลงมือทำ / แบ่งเบา</label>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3) วิดีโอ -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 2 — ขอโทษนะเธฮ</h2>
+          <div class="card">
+            <h2>หน้า 3 — ขอโทษ</h2>
             <video autoplay loop muted playsinline controls>
-              <source src="image/780061732.067512.mp4" type="video/mp4" />
+              <source src="image/780061732.067512.mp4" type="video/mp4">
             </video>
             <p>เค้าขอโทษนะ ที่ชวนเธอทะเลาะบ่อย ๆ
 ที่บางทีถามนู่นนี่เยอะเกินไป อยากให้เธอปรับตัวตามเค้า
@@ -151,11 +143,23 @@
           </div>
         </section>
 
-        <!-- Slide 3 -->
+        <!-- 4) Q2 -->
+        <section class="slide" data-req="q2">
+          <div class="card">
+            <h2>หน้า 4 — วันที่ใจไม่มั่นคง เธออยากได้กำลังใจแบบไหน?</h2>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q2" value="กอดเงียบ ๆ"> แค่กอดเงียบ ๆ แล้วอยู่ข้างกัน</label>
+              <label class="opt"><input type="radio" name="q2" value="เหตุผลชัด ๆ"> คุยเหตุผลชัด ๆ ให้หายคาใจ</label>
+              <label class="opt"><input type="radio" name="q2" value="การกระทำแทนคำพูด"> เห็นการกระทำแทนคำพูด</label>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5) ภาพความทรงจำสั้น -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 3 — รักเค้ามั้ย เค้าขอบคุณนะ</h2>
-            <img src="image/S__65110192_0.jpg" alt="เรา" />
+          <div class="card">
+            <h2>หน้า 5 — ขอบคุณนะ</h2>
+            <img src="image/S__65110192_0.jpg" alt="เรา">
             <p>ขอบคุณนะ ที่ยังอยู่ข้าง ๆ เค้า
 ถึงแม้บางครั้งเค้าจะชวนทะเลาะ พูดมากเกินไป หรือถามเรื่องอนาคตบ่อยจนทำให้เธอเหนื่อย
 เธอยังไม่ปล่อยมือไปไหน และยังให้โอกาสเค้าได้เรียนรู้ที่จะรักเธอให้ถูกวิธี 
@@ -186,11 +190,20 @@
           </div>
         </section>
 
-        <!-- Slide 4 -->
+        <!-- 6) T1 -->
+        <section class="slide" data-req="t1">
+          <div class="card">
+            <h2>หน้า 6 — มีอะไรจะบอกเค้าป่าว</h2>
+            <p>อยากให้เค้ารู้อะไรตอนนี้ (สิ่งที่ต้องการ/สิ่งที่อยากให้ปรับ/ประโยคที่อยากได้ยิน)</p>
+            <textarea id="t1" placeholder="พิมพ์จากใจของเธอได้เลย…"></textarea>
+          </div>
+        </section>
+
+        <!-- 7) ภาพทริป -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 4 — ที่พักใจ</h2>
-            <img src="image/S__65110201_0.jpg" alt="ที่พักใจ" />
+          <div class="card">
+            <h2>หน้า 7 — เค้ามีอะไรจะบอก</h2>
+            <img src="image/S__65110202_0.jpg" alt="trip">
             <p>ดีใจนะที่เค้าได้เห็นเธอในทุก ๆ ช่วงเวลาของชีวิต
 ได้เห็นเธอตอนหลับสบาย ๆ แบบไม่รู้เรื่องอะไรเลย ปลุกก็ไม่ตื่น
 ได้เห็นเธอตอนตื่นที่งัวเงีย หัวฟู ตาลอย เธอเก็บห้องให้ ถือของให้ ตัดเล็บให้ ถ่ายเก็บไว้ด้วย อิอิ มันเป็นภาพธรรมดาที่คนอื่นอาจไม่เห็นค่า แต่สำหรับเค้ามันมีนะ
@@ -221,10 +234,41 @@
           </div>
         </section>
 
-        <!-- Slide 5 (แกลเลอรีภาพหลายใบ) -->
+        <!-- 8) METERS -->
+        <section class="slide" data-req="meters">
+          <div class="card">
+            <h2>หน้า 8 — อยากรู้ๆๆๆๆ</h2>
+            <div class="two">
+              <div class="sliderBox">
+                <b>ตอนนี้เหนื่อยกับเค้าแค่ไหน?</b>
+                <input type="range" id="m_vila_tired" min="0" max="10" value="3">
+                <div>ค่า: <span id="m_vila_tired_v">3</span>/10</div>
+              </div>
+              <div class="sliderBox">
+                <b>ตอนนี้อยากอยู่ต่อมากแค่ไหน?</b>
+                <input type="range" id="m_pura_stay" min="0" max="10" value="8">
+                <div>ค่า: <span id="m_pura_stay_v">8</span>/10</div>
+              </div>
+            </div>
+            <div class="two">
+              <div class="sliderBox">
+                <b>อยากความมั่นคงมากแค่ไหน?</b>
+                <input type="range" id="m_vila_secure" min="0" max="10" value="7">
+                <div>ค่า: <span id="m_vila_secure_v">7</span>/10</div>
+              </div>
+              <div class="sliderBox">
+                <b>อยากพื้นที่ส่วนตัวมากแค่ไหน?</b>
+                <input type="range" id="m_pura_space" min="0" max="10" value="6">
+                <div>ค่า: <span id="m_pura_space_v">6</span>/10</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9) แกลเลอรี่รูป (ตรวจรูปให้ครบ) -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 5 — ความทรงจำที่รัก</h2>
+          <div class="card">
+            <h2>หน้า 9 — ความทรงจำที่รัก</h2>
             <img src="image/S__65110193_0.jpg" alt="ความทรงจำ 1" />
             <img src="image/S__65110194_0.jpg" alt="ความทรงจำ 2" />
             <img src="image/S__65110199_0.jpg" alt="ความทรงจำ 3" />
@@ -234,22 +278,23 @@
           </div>
         </section>
 
-        <!-- Slide 6 -->
+        <!-- 10) วิดีโอ 2 -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 6 — ขอโอกาส 100 ปี</h2>
-            <img src="image/S__65110202_0.jpg" alt="ทริปทะเล" />
+          <div class="card">
+            <h2>หน้า 10 — ยังอยากเดินไปด้วยกันไหม</h2>
+            <video autoplay loop muted playsinline controls>
+              <source src="image/546475942399181270.mp4" type="video/mp4">
+            </video>
             <p>เค้าอยากมีวันครบรอบกับเธอซัก100 ปีเลย คำว่าตลอดไปยันเเก่มันอาจจะเวอร์ งั้นเค้าขออยุ่กับเธอ100ปีนะ
-                เค้าชอบคำที่เธอพูดมากที่สุด ถ้าเรายังอยากมีกันอยู่อะ อยุ่ด้วยกันยันแก่ยังได้เลย งั้นมาทำกันนนนนน
-            </p>
+                เค้าชอบคำที่เธอพูดมากที่สุด ถ้าเรายังอยากมีกันอยู่อะ อยุ่ด้วยกันยันแก่ยังได้เลย งั้นมาทำกันนนนนน</p>
           </div>
         </section>
 
-        <!-- Slide 7 (เหตุผล: เธอต้องมีเค้า / เค้าต้องมีเธอ) -->
+        <!-- 11) เหตุผลสั้น ๆ -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 7 — เบื่อยังงงงง</h2>
-            <p><b>เหตุผลที่เธอต้องมีเค้า</b> 1.	เค้าเป็นคนที่ยอมรับความไม่สมบูรณ์แบบของเธอ 
+          <div class="card">
+            <h2>หน้า 11 — เหตุผลที่เราต้องมีกัน</h2>
+            <<p><b>เหตุผลที่เธอต้องมีเค้า</b> 1.	เค้าเป็นคนที่ยอมรับความไม่สมบูรณ์แบบของเธอ 
 2.	เค้าจำรายละเอียดเล็ก ๆ ของเธอ 
 3.	เค้าจะพยายามเปลี่ยนเพื่อเธอ — แสดงว่าความสัมพันธ์มีค่าเกินกว่าแค่คำพูด
 4.	เค้าพร้อมอยู่ข้าง ๆ ในวันที่เธอล้ม 
@@ -264,166 +309,154 @@
 5.	เธอเป็นแรงสนับสนุนในความสำเร็จและความล้มเหลวของเขา — ไม่ทิ้งในวันที่ยาก
 6.	เธอทำให้เค้ารู้ว่า “ความรัก” คือการใช้ชีวิตร่วมกัน ไม่ใช่แค่คำหวาน
 7.	เธอคือเหตุผลที่เขายังอยากพยายามและไม่ยอมแพ้</p>
-
           </div>
         </section>
 
-        <!-- Slide 8 -->
+        <!-- 12) ปิดท้าย + ปุ่มส่ง Google Sheets -->
         <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 8 — ทริปของเรา</h2>
-            <img src="image/S__65110196_0.jpg" alt="ทริป" />
-            <p>เค้าอยากมีเธอไปเที่ยวด้วยกันทุกที่ ถ้าไม่มีเธอใครจะจัดกระเป๋าให้เค้าได้ เเล้วถ้าไม่มีเค้าใครจะชมว่าเธอหล่อ เค้าต้อไปกับเธอ เธอต้องไปกับเค้านะอิอิ เพราะงั้นเราต้องมีกันเเละกันนะ ฟินจังตังอยู่ครบ อิอิ</p>
-          </div>
-        </section>
-
-        <!-- Slide 9 (วิดีโอที่สอง) -->
-        <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 9 — อะไรรรรรรเปล่าทะเลาะ</h2>
-            <video autoplay loop muted playsinline controls>
-              <source src="image/546475942399181270.mp4" type="video/mp4" />
-            </video>
-            <p>เธออ่านมาถึงหน้าที่9แล้ว 
-เค้าไม่รุ้ว่าเธอจะรู้สึกยังไงบ้างตอนอ่าน ว่าเค้าเพี้ยนรึเปล่า เพ้อเจ้อรึเปล่า คิดไปไกลรึเปล่า เธออ่านแล้วจะขมวดคิ้วอยากบ่นมั้ย จะยิ้มกับข้อความแบบนี้มั้ย แต่เธอเราไม่บอกเลิกกันเเล้วได้มั้ย เค้าก็จะไม่พูด ไม่บอก ไม่พิมพ์ เธอก็ต้องทำให้ได้เลยนะ วันไหนที่ทะเลาะกันเเล้วเหนื่อย เค้าอยากให้เราทะเลาะเพื่อปรับกันไปเรื่อยๆนะเธอ เค้าขอโทษ ที่ผ่านมาที่ทำให้เธอเหนื่อยจนเธอคิดจะปล่อยมือกัน ถ้าวันหนึ่งเธอหายไป เค้าคงรู้สึกเหมือนบ้านถูกย้ายออกทั้งหลัง  ไม่มีเสียงหัวเราะ ไม่มีคนคอยกอด กลัววันที่จะไม่เห็นเธอข้าง ๆ มากกว่าอะไรทั้งหมด  ขอบคุณที่ยังยอมถ่ายรูปให้ ทั้งที่เค้าทำท่าเดิมซ้ำ ๆ ขอบคุณที่ปล่อยให้เค้ากินจนขึ้นมา 10 โล แต่ก็ยังบอกว่าไม่อ้วน ขอบคุณที่ยังโทรหากันอยู่ตลอด เค้าเคยบอกว่าเค้าไม่มั่นใจตัวเอง แต่มั่นใจอย่างเดียวว่าอยากอยู่ข้างเธอเสมอ ไม่ว่าคนอื่นจะดีกว่าแค่ไหน เค้าก็อยากเดินด้วยกันกับเธอคนเดียว
-ตอนนี้เธอยังรักกันเหมือนเดิมใช่มั้ย 
-
-            </p>
-          </div>
-        </section>
-
-        <!-- Slide 10 -->
-        <section class="slide">
-          <div class="slideInner">
-            <h2>หน้า 10 — รัก</h2>
+          <div class="card">
+            <h2>หน้า 12 — รัก</h2>
             <img src="image/S__65110195_0.jpg" alt="รักเสมอ" />
-            <p>ถ้าเธออ่านจบเเล้วตอนที่ไม่ได้อยู่ข้างเค้า อย่าลืมโทรมาบอกรักกันด้วยนะ</p>
-          </div>
+            <p>เค้าไม่รุ้ว่าเธอจะรู้สึกยังไงบ้างตอนอ่าน ว่าเค้าเพี้ยนรึเปล่า เพ้อเจ้อรึเปล่า คิดไปไกลรึเปล่า เธออ่านแล้วจะขมวดคิ้วอยากบ่นมั้ย จะยิ้มกับข้อความแบบนี้มั้ย แต่เธอเราไม่บอกเลิกกันเเล้วได้มั้ย เค้าก็จะไม่พูด ไม่บอก ไม่พิมพ์ เธอก็ต้องทำให้ได้เลยนะ วันไหนที่ทะเลาะกันเเล้วเหนื่อย เค้าอยากให้เราทะเลาะเพื่อปรับกันไปเรื่อยๆนะเธอ เค้าขอโทษ ที่ผ่านมาที่ทำให้เธอเหนื่อยจนเธอคิดจะปล่อยมือกัน ถ้าวันหนึ่งเธอหายไป เค้าคงรู้สึกเหมือนบ้านถูกย้ายออกทั้งหลัง  ไม่มีเสียงหัวเราะ ไม่มีคนคอยกอด กลัววันที่จะไม่เห็นเธอข้าง ๆ มากกว่าอะไรทั้งหมด  ขอบคุณที่ยังยอมถ่ายรูปให้ ทั้งที่เค้าทำท่าเดิมซ้ำ ๆ ขอบคุณที่ปล่อยให้เค้ากินจนขึ้นมา 10 โล แต่ก็ยังบอกว่าไม่อ้วน ขอบคุณที่ยังโทรหากันอยู่ตลอด เค้าเคยบอกว่าเค้าไม่มั่นใจตัวเอง แต่มั่นใจอย่างเดียวว่าอยากอยู่ข้างเธอเสมอ ไม่ว่าคนอื่นจะดีกว่าแค่ไหน เค้าก็อยากเดินด้วยกันกับเธอคนเดียว
+ตอนนี้เธอยังรักกันเหมือนเดิมใช่มั้ย ถ้าอ่านจบตอนที่ไม่ได้อยู่ข้าง ๆ กัน โทรมาบอกรักกันด้วยนะ</p>
+            <div class="two" style="margin-top:10px">
+              <button class="soundBtn" id="btnSend">ส่งคำตอบเข้า Google Sheets</button>
+            </div>
         </section>
       </div>
 
       <div class="ctrl">
-        <button class="navBtn" id="prev">⟵ หน้าก่อนหน้า</button>
         <div class="dots" id="dots"></div>
-        <button class="navBtn" id="next">หน้าถัดไป ⟶</button>
       </div>
     </div>
 
-    <footer>
-      © เว็บไซต์เล็ก ๆ ที่อยากให้เรารักกันขึ้นทุกวัน • <a class="btnTiny" href="#" id="replayHearts">โปรยหัวใจ 💖</a>
-    </footer>
+    <footer>© เว็บไซต์เล็ก ๆ ไว้รักกันมากขึ้นทุกวัน</footer>
   </div>
 
   <script>
+    // ====== Audio ======
+    const bgm = document.getElementById('bgm');
+    const soundBtn = document.getElementById('soundBtn');
+    const setSoundLabel = ()=> soundBtn.textContent = bgm.muted ? '🔊 เปิดเสียง' : '🔇 ปิดเสียง';
+    bgm.play().catch(()=>{}); // try autoplay (muted)
+    document.addEventListener('click', ()=> bgm.play().catch(()=>{}), {once:true});
+    soundBtn.addEventListener('click', ()=>{ bgm.muted=!bgm.muted; if(bgm.paused) bgm.play().catch(()=>{}); setSoundLabel(); });
+    setSoundLabel();
+
+    // ====== Slides / Nav (คลิกเลขเท่านั้น ไม่มีเปลี่ยนหน้าอัตโนมัติจากการเลื่อน) ======
     const slides = [...document.querySelectorAll('.slide')];
     const dotsWrap = document.getElementById('dots');
-    const prevBtn = document.getElementById('prev');
-    const nextBtn = document.getElementById('next');
     const progress = document.getElementById('progress');
     const heartsBox = document.getElementById('hearts');
-    const stage = document.getElementById('stage');
     let i = 0;
 
     function renderDots(){
       dotsWrap.innerHTML = '';
       slides.forEach((_, idx)=>{
         const b = document.createElement('button');
-        b.className = 'dot' + (idx===i? ' active':'');
+        b.className = 'dot' + (idx===i ? ' active':'');
         b.textContent = idx+1;
         b.setAttribute('aria-label','ไปหน้า '+(idx+1));
-        b.onclick = ()=>{ i=idx; update();
-
-    // ===== scroll-to-swap: เลื่อนสุดบนสุด/ล่างสุดแล้วค่อยเปลี่ยนสไลด์ =====
-    let wheelLock = false;
-    function atTop(el){ return el.scrollTop <= 0; }
-    function atBottom(el){ return Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight; }
-    function handleWheel(e){
-      const active = document.querySelector('.slide.active');
-      if(!active) return;
-      if(wheelLock) return; // ป้องกันเด้งหลายครั้ง
-      const dy = e.deltaY;
-      // ถ้าเลื่อนลงและอยู่ล่างสุด → ไปหน้าถัดไป
-      if(dy > 0 && atBottom(active)){
-        wheelLock = true; nextBtn.click(); setTimeout(()=>wheelLock=false, 500);
-      }
-      // ถ้าเลื่อนขึ้นและอยู่บนสุด → ไปหน้าก่อนหน้า
-      if(dy < 0 && atTop(active)){
-        wheelLock = true; prevBtn.click(); setTimeout(()=>wheelLock=false, 500);
-      }
-    }
-    stage.addEventListener('wheel', handleWheel, {passive:true});
-
-    // Touch: ถ้าปัดขึ้นที่ล่างสุด → ไปหน้าใหม่ / ปัดลงที่บนสุด → กลับหน้าเดิม
-    stage.addEventListener('touchstart', e=> sx = e.changedTouches[0].screenY, {passive:true});
-    stage.addEventListener('touchend', e=>{
-      const sy2 = e.changedTouches[0].screenY; const active = document.querySelector('.slide.active');
-      if(!active) return;
-      if(sx - sy2 > 60 && atBottom(active)) nextBtn.click();
-      if(sy2 - sx > 60 && atTop(active)) prevBtn.click();
-    }, {passive:true});
-
-    // แสดงตัวบอกให้เลื่อน
-    const hint = document.createElement('div');
-    
-    hint.style.cssText = 'position:absolute;bottom:54px;left:50%;transform:translateX(-50%);font-size:.9rem;color:#a05;opacity:.7;background:#fff8;backdrop-filter:blur(6px);padding:6px 10px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.12)';
-    stage.appendChild(hint);
-    setTimeout(()=> hint.remove(), 3500); sprinkleHearts(); };
+        b.onclick = ()=>{ i=idx; update(); sprinkleHearts(12); };
         dotsWrap.appendChild(b);
       });
     }
 
     function update(){
       slides.forEach((s,idx)=> s.classList.toggle('active', idx===i));
-      prevBtn.disabled = (i===0);
-      nextBtn.disabled = (i===slides.length-1);
       renderDots();
-      const pct = ((i)/(slides.length-1))*100; progress.style.width = pct+'%';
+      progress.style.width = (i/(slides.length-1))*100 + '%';
+      localStorage.setItem('qa_current', i);
+      buildSummary();
     }
 
-    prevBtn.onclick = ()=>{ if(i>0){ i--; update(); sprinkleHearts(); } };
-    nextBtn.onclick = ()=>{ if(i<slides.length-1){ i++; update(); sprinkleHearts(); } };
-
-    window.addEventListener('keydown', e=>{
-      if(e.key==='ArrowRight') nextBtn.click();
-      if(e.key==='ArrowLeft') prevBtn.click();
-    });
-
-    // Touch swipe
-    let sx=0, ex=0;
-    stage.addEventListener('touchstart', e=> sx = e.changedTouches[0].screenX);
-    stage.addEventListener('touchend', e=>{ ex = e.changedTouches[0].screenX; if(ex - sx > 50) prevBtn.click(); if(sx - ex > 50) nextBtn.click(); });
-
-    // Floating hearts generator
-    function sprinkleHearts(count=14){
+    // Floating hearts (เล็กๆ)
+    function sprinkleHearts(count=10){
+      const box = heartsBox;
       for(let k=0;k<count;k++){
         const h=document.createElement('span');
         const size=12+Math.random()*18; h.style.width=h.style.height=size+'px';
-        h.style.left = Math.random()*100+'%';
+        h.style.left=Math.random()*100+'%';
         h.style.animationDuration = 4+Math.random()*5+'s';
-        h.style.opacity = .35 + Math.random()*.4;
-        heartsBox.appendChild(h);
+        h.style.opacity=.35+Math.random()*.4;
+        box.appendChild(h);
         setTimeout(()=> h.remove(), 9000);
       }
     }
-    sprinkleHearts(24);
+    sprinkleHearts(20);
 
-    // ===== Audio: autoplay muted + manual unmute (mobile-ready) =====
-    const bgm = document.getElementById('bgm');
-    const soundBtn = document.getElementById('soundBtn');
-    const setSoundLabel = ()=> soundBtn.textContent = bgm.muted ? '🔊 เปิดเสียง' : '🔇 ปิดเสียง';
-    bgm.play().catch(()=>{}); // try silent autoplay
-    document.addEventListener('click', ()=> bgm.play().catch(()=>{}), {once:true});
-    soundBtn.addEventListener('click', ()=>{
-      bgm.muted = !bgm.muted;
-      if(bgm.paused) bgm.play().catch(()=>{});
-      setSoundLabel();
+    // ====== Collect answers (localStorage) ======
+    const state = JSON.parse(localStorage.getItem('qa_state')||'{}');
+    const saveState = ()=> localStorage.setItem('qa_state', JSON.stringify(state));
+
+    // radios
+    ['q1','q2'].forEach(q=>{
+      document.querySelectorAll(`input[name="${q}"]`).forEach(r=>{
+        r.checked = state[q]===r.value;
+        r.addEventListener('change', ()=>{ state[q]=r.value; saveState(); });
+      });
     });
-    setSoundLabel();
 
-    // Hearts replay link
-    document.getElementById('replayHearts')?.addEventListener('click', (e)=>{ e.preventDefault(); sprinkleHearts(40); });
+    // text
+    const t1 = document.getElementById('t1'); if(t1 && state.t1) t1.value=state.t1;
+    t1?.addEventListener('input', ()=>{ state.t1=t1.value.trim(); saveState(); });
 
+    // meters
+    const ids=['m_vila_tired','m_pura_stay','m_vila_secure','m_pura_space'];
+    const labs=['m_vila_tired_v','m_pura_stay_v','m_vila_secure_v','m_pura_space_v'];
+    ids.forEach((id,idx)=>{
+      const el=document.getElementById(id); const lb=document.getElementById(labs[idx]);
+      if(!el) return; if(state[id]) el.value=state[id]; if(lb) lb.textContent=el.value;
+      el?.addEventListener('input',()=>{ if(lb) lb.textContent=el.value; state[id]=el.value; saveState(); });
+    });
+
+    // summary (เรียกเมื่ออยู่หน้า 12)
+    function pick(k, d='—'){ return (state[k] && String(state[k]).trim()) || d; }
+    function buildSummary(){ /* สามารถทำสรุปเพิ่มได้ภายหลัง */ }
+
+    // restore last page
+    const last = parseInt(localStorage.getItem('qa_current')||'0',10);
+    if(!isNaN(last) && last>=0 && last<slides.length){ i=last; }
     update();
+
+    // ====== ส่งเข้า Google Sheets ผ่าน Google Forms ======
+    // ใช้เลข entry จากลิงก์ Prefill ของคุณ (แก้ได้ตามจริง)
+    const FORM_ID = "1FAIpQLScJXoxC9YnDBoB90D6obcaib7Zmru9cVUD8VXT8CGB3Vlh8GQ"; // ของคุณ
+    const FORM_ACTION = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+    const ENTRY = {
+      q1: "352615957",        // อะไรทำให้ถูกรัก
+      q2: "1566855561",       // กำลังใจแบบไหน
+      m_vila_tired:  "763811547",
+      m_pura_stay:   "116942198",
+      m_vila_secure: "1647252745",
+      m_pura_space:  "201907872", // ถ้าช่องนี้ไม่ตรง ให้เปลี่ยนเลขตาม Prefill
+      t1: "1713004406"         // หน้า 6 — มีอะไรจะบอกเค้าป่าว (ยืนยันเลขจาก Prefill)
+    };
+
+    async function sendToGoogleForm(){
+      const fd = new FormData();
+      if(state.q1)               fd.append(`entry.${ENTRY.q1}`, state.q1);
+      if(state.q2)               fd.append(`entry.${ENTRY.q2}`, state.q2);
+      if(state.m_vila_tired)     fd.append(`entry.${ENTRY.m_vila_tired}`, state.m_vila_tired);
+      if(state.m_pura_stay)      fd.append(`entry.${ENTRY.m_pura_stay}`, state.m_pura_stay);
+      if(state.m_vila_secure)    fd.append(`entry.${ENTRY.m_vila_secure}`, state.m_vila_secure);
+      if(state.m_pura_space)     fd.append(`entry.${ENTRY.m_pura_space}`, state.m_pura_space);
+      if(state.t1)               fd.append(`entry.${ENTRY.t1}`, state.t1);
+      try{
+        await fetch(FORM_ACTION, { method: "POST", mode: "no-cors", body: fd });
+        alert("ส่งคำตอบเข้า Google Sheets แล้วนะ ✓");
+      }catch(e){
+        alert("ส่งไม่สำเร็จ ลองใหม่อีกครั้งได้เลย");
+        console.error(e);
+      }
+    }
+
+    document.getElementById('btnSend').addEventListener('click', sendToGoogleForm);
+    document.getElementById('btnSaveJson').addEventListener('click', ()=>{
+      const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='our-answers.json'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),500);
+    });
   </script>
 </body>
 </html>
